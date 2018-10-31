@@ -3,7 +3,7 @@ pragma solidity ^0.4.24;
 import './Multihash.sol';
 
 /** @title Bounty */
-contract CropBounty is MultiHash {
+contract Bounties is MultiHash {
 
   struct Bounty {
     uint256 id;
@@ -29,5 +29,24 @@ contract CropBounty is MultiHash {
     Bounty memory bounty = Bounty(bounties.length, 0, 0, info, msg.sender, false, true, false);
     bounties.push(bounty);
     bountiesForOwner[msg.sender].push(bounty.id);
+  }
+
+  function getBountyCounty() public view returns (uint256) {
+    return bounties.length;
+  }
+
+  function getBounty(uint256 _id) public view returns (uint256, uint256, address, bool, bool, bool, bytes32, uint8, uint8) {
+    Bounty storage bounty = bounties[_id];
+    return (
+      bounty.farmId,
+      bounty.seasonId,
+      bounty.creator,
+      bounty.claimed,
+      bounty.isActive,
+      bounty.success,
+      bounty.info.hash,
+      bounty.info.hashFunction,
+      bounty.info.size
+    );
   }
 }
