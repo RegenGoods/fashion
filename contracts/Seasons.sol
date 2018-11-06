@@ -11,6 +11,7 @@ contract Seasons is Measure {
     uint256 yieldId;
     bool isComplete;
     uint256[] measurementIds;
+    uint256[] plotIds;
     Multihash info;
   }
 
@@ -37,8 +38,8 @@ contract Seasons is Measure {
     );
   }
 
-  function getSeasonMeasurementIds(uint256 _id) public view returns (uint256[]) {
-    return seasons[_id].measurementIds;
+  function getSeasonMeasurementAndPlotIds(uint256 _id) public view returns (uint256[], uint256[]) {
+    return (seasons[_id].measurementIds, seasons[_id].plotIds);
   }
 
 }

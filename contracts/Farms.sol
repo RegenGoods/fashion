@@ -1,15 +1,17 @@
 pragma solidity ^0.4.24;
 
 import './Seasons.sol';
+import './Plots.sol';
 
 /** @title MultiHash. */
-contract Farms is Seasons {
+contract Farms is Seasons, Plots {
 
   struct Farm {
     uint256 id;
     address owner;
     Multihash info;
     uint256[] seasonIds;
+    uint256[] plotIds;
   }
 
   Farm[] public farms;
@@ -24,19 +26,30 @@ contract Farms is Seasons {
 
   function addFarm(bytes32 _hash, uint8 _hashFunction, uint8 _size) public {
       Multihash memory info = Multihash(_hash, _hashFunction, _size);
-      uint256[] memory seasons;
-      Farm memory farm = Farm(farms.length, msg.sender, info, seasons);
+      uint256[] memory seasonIds;
+      uint256[] memory plotIds;
+      Farm memory farm = Farm(farms.length, msg.sender, info, seasonIds, plotIds);
       farms.push(farm);
       ownerFarms[msg.sender].push(farm.id);
 
       emit FarmAdded(farm.id, farm.owner);
   }
 
+  function addPlot(uint256 _id, bytes32 _hash, uint8 _hashFunction, uint8 _size) public onlyFarmOwner(_id) {
+      Farm storage farm = farms[_id];
+      Multihash memory info = Multihash(_hash, _hashFunction, _size);
+      Plot memory plot = Plot(plots.length, info);
+      farm.plotIds.push(plot.id);
+
+      emit PlotAdded(plot.id, farm.id);
+  }
+
 
   function addSeason(uint256 _farmId, bytes32 _hash, uint8 _hashFunction, uint8 _size) public onlyFarmOwner(_farmId) {
     Multihash memory info = Multihash(_hash, _hashFunction, _size);
     uint256[] memory measurementIds;
-    Season memory season = Season(seasons.length, _farmId, 0, false, measurementIds, info);
+    uint256[] memory plotIds;
+    Season memory season = Season(seasons.length, _farmId, 0, false, measurementIds, plotIds, info);
     farms[_farmId].seasonIds.push(season.id);
     seasons.push(season);
 
@@ -84,7 +97,7 @@ contract Farms is Seasons {
       );
   }
 
-  function getFarmSeasonIds(uint256 _id) public view returns (uint256[]) {
-    return farms[_id].seasonIds;
+  function getFarmSeasonAndPlotIds(uint256 _id) public view returns (uint256[], uint256[]) {
+    return (farms[_id].seasonIds, farms[_id].plotIds);
   }
 }
