@@ -20,7 +20,7 @@ contract Farms is Seasons, Plots {
   event FarmAdded(uint256 id, address owner);
 
   modifier onlyFarmOwner(uint256 _farmId) {
-    require(farms[_farmId].owner == msg.sender, 'Must be owner of farm to create a season');
+    require(farms[_farmId].owner == msg.sender, 'Must be owner of farm');
     _;
   }
 
