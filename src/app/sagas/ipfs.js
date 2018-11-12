@@ -20,6 +20,7 @@ function* ipfsUploadThenSave(action) {
       const hash = yield call(ipfs.add, Buffer.from(action.payload.upload, 'utf-8'));
       let { digest, hashFunction, size } = getBytes32FromMultihash(hash[0].path)
       console.log('got the hash:\n', hash[0].path, digest, '\nhf\n', hashFunction, '\nsize\n', size )
+      yield put({type: 'IPFS_UPLOAD_SUCCEEDED', payload: {hash, id: action.payload.hashId}})
       action.payload.save(digest, hashFunction, size)
 
    } catch (e) {

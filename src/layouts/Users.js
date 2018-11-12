@@ -12,13 +12,16 @@ class User extends Component {
       <div>
         <TopBar address={this.props.address} />
         <Grid container spaceing={16}>
+
           <Grid item xs={4}>
             <CreateFarm />
             <FarmList address={this.props.address}/>
           </Grid>
+
           <Grid item xs={4}>
 
           </Grid>
+          
         </Grid>
 
       </div>

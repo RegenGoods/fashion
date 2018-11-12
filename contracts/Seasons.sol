@@ -1,23 +1,22 @@
 pragma solidity ^0.4.24;
 
-import './Measure.sol';
+import './Multihash.sol';
 
 /** @title MultiHash. */
-contract Seasons is Measure {
+contract Seasons is Multihash {
 
   struct Season {
     uint256 id;
     uint256 farmId;
     uint256 yieldId;
     bool isComplete;
-    uint256[] measurementIds;
     uint256[] plotIds;
-    Multihash info;
+    MultiHash info;
   }
 
   struct Yield {
     uint256 id;
-    Multihash info;
+    MultiHash info;
   }
 
   Season[] seasons;
@@ -38,8 +37,8 @@ contract Seasons is Measure {
     );
   }
 
-  function getSeasonMeasurementAndPlotIds(uint256 _id) public view returns (uint256[], uint256[]) {
-    return (seasons[_id].measurementIds, seasons[_id].plotIds);
+  function getSeasonPlotIds(uint256 _id) public view returns (uint256[]) {
+    return seasons[_id].plotIds;
   }
 
 }

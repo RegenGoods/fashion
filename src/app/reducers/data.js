@@ -1,7 +1,7 @@
 import produce from 'immer'
 const initialState = {
     hashedContent: {},
-    requestedHash: null,
+    uploadedHashes: {},
     pendingUpload: false,
     error: false
 };
@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
         case 'IPFS_UPLOAD_SUCCEEDED':
           draftState.pendingUpload = false;
           draftState.error = false
-          draftState.requestedHash = action.payload.hash;
+          draftState.uploadedHashes[action.payload.id] = action.payload.hash
           break
         case 'IPFS_UPLOAD_FAILED':
           draftState.error = action.message

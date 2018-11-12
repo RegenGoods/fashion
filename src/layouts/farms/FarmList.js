@@ -25,7 +25,7 @@ class FarmList extends Component {
 
     if (Array.isArray(ownerFarmIds)) {
       if (ownerFarmIds.length) {
-        farms = ownerFarmIds.map(id => <FarmItem id={id} />)
+        farms = ownerFarmIds.map(id => <FarmItem key={id} id={id} />)
       } else {
         farms = 'No farms for user'
       }
