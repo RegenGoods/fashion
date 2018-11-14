@@ -3,7 +3,7 @@ import schema from '../../schemas/season'
 import Create from './Create'
 
 export default ({farmId, plotOptions}) => {
-  const seasonSchema = {...schema,offChain:schema.offChain.map(f=>f.name === 'plots' ? {...f, options:plotOptions} : f)}
+  const seasonSchema = {...schema,contract:schema.contract.map(f=>f.name === 'plots' ? {...f, options:plotOptions} : f)}
   return (<Create
     schema={seasonSchema}
     submitArgs={[farmId]}

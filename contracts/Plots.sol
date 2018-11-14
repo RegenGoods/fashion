@@ -15,6 +15,12 @@ contract Plots is Multihash {
   Plot[] public plots;
 
   event PlotAdded(uint256 id, uint256 farmId);
+  modifier plotsAreInFarm(uint256[] _plotIds, uint256 _farmId) {
+    for (uint i = 0; i<_plotIds.length;i++) {
+      require(plots[_plotIds[i]].farmId == _farmId, 'Plot is not in farm');
+    }
+    _;
+  }
 
   function getPlot(uint256 _id) public view returns (uint256, bytes32, uint8, uint8) {
     Plot storage plot = plots[_id];

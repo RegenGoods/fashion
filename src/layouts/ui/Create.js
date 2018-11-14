@@ -21,11 +21,11 @@ class Create extends Component {
       openInfo: false,
       hashId: null,
       contractFields: this.props.schema.contract.reduce((acc, f) => {
-        acc[f.label] = f.default;
+        acc[f.name] = f.default;
         return acc;
       }, {}),
       offChainFields: this.props.schema.offChain.reduce((acc, f) => {
-        acc[f.label] = f.default;
+        acc[f.name] = f.default;
         return acc;
       }, {}),
     }
@@ -34,14 +34,15 @@ class Create extends Component {
   updateShowingForm = open => this.setState({...this.state, open})
   updateShowingInfo = openInfo => this.setState({...this.state, openInfo})
 
-  updateContractField = (field, e) => this.setState({...this.state, contractFields: {...this.state.contractFields, [field]: e.target.value}})
+  updateContractField = (field, e, val) => this.setState({...this.state, contractFields: {...this.state.contractFields, [field]: e.target.value}})
 
-  updateOffChainField = (field, e) => this.setState({...this.state, offChainFields: {...this.state.offChainFields, [field]: e.target.value}})
+  updateOffChainField = (field, e, val) => this.setState({...this.state, offChainFields: {...this.state.offChainFields, [field]: e.target.value}})
 
   submit = () => {
     const hashId = Math.ceil(Math.random() * 1000000000000);
     let submit = this.methods[this.props.contractSubmit].cacheSend;
     if (this.props.submitArgs) this.props.submitArgs.forEach(arg => submit = submit.bind(this, arg))
+    this.props.schema.contract.forEach(field => submit = submit.bind(this, this.state.contractFields[field.name]))
     this.props.submit(JSON.stringify(this.state.offChainFields), submit, hashId)
     this.setState({...this.state, hashId, open: false, openInfo: true})
   }
@@ -50,15 +51,15 @@ class Create extends Component {
 
     const contractFields = [...this.props.schema.contract].map(f => {
       f.value = this.state.contractFields[f.name]
-      f.onChange = this.updateContractField.bind(this, f.label)
-      f.key = f.label
+      f.onChange = this.updateContractField.bind(this, f.name)
+      f.key = f.name
       return f;
     })
 
     const offChainFields = [...this.props.schema.offChain].map(f => {
-      f.value = this.state.offChainFields[f.label]
-      f.onChange = this.updateOffChainField.bind(this, f.label)
-      f.key = f.label
+      f.value = this.state.offChainFields[f.name]
+      f.onChange = this.updateOffChainField.bind(this, f.name)
+      f.key = f.name
       return f;
     })
 

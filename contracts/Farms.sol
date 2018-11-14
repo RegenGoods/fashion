@@ -39,7 +39,7 @@ contract Farms is Plots, Seasons, Measure {
   function addPlot(uint256 _id, bytes32 _hash, uint8 _hashFunction, uint8 _size) public onlyFarmOwner(_id) {
       Farm storage farm = farms[_id];
       MultiHash memory info = MultiHash(_hash, _hashFunction, _size);
-          uint256[] memory measurementIds;
+      uint256[] memory measurementIds;
       Plot memory plot = Plot(plots.length, farm.id, measurementIds, info);
       farm.plotIds.push(plot.id);
       plots.push(plot);
@@ -48,10 +48,9 @@ contract Farms is Plots, Seasons, Measure {
   }
 
 
-  function addSeason(uint256 _farmId, bytes32 _hash, uint8 _hashFunction, uint8 _size) public onlyFarmOwner(_farmId) {
+  function addSeason(uint256 _farmId, uint256[] _plotIds, bytes32 _hash, uint8 _hashFunction, uint8 _size) public onlyFarmOwner(_farmId)  plotsAreInFarm(_plotIds, _farmId) {
     MultiHash memory info = MultiHash(_hash, _hashFunction, _size);
-    uint256[] memory plotIds;
-    Season memory season = Season(seasons.length, _farmId, 0, false, plotIds, info);
+    Season memory season = Season(seasons.length, _farmId, 0, false, _plotIds, info);
     farms[_farmId].seasonIds.push(season.id);
     seasons.push(season);
 

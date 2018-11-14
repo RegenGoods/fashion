@@ -19,21 +19,24 @@ class SeasonItem extends Component {
   getRenderValues = () => {
     return {
       season: this.props.Regen.getSeason[this.getSeasonKey] ?
-        Object.values(this.props.Regen.getSeason[this.getSeasonKey].value) : 'loading season'
+        Object.values(this.props.Regen.getSeason[this.getSeasonKey].value) : 'loading season',
+      plotIds: this.props.Regen.getSeasonPlotIds[this.getPlotsKey] ?
+        this.props.Regen.getSeasonPlotIds[this.getPlotsKey].value : 'loading plot ids'
     }
   }
 
   render () {
     const { account, id } = this.props
-    let { season } = this.getRenderValues();
+    let { season, plotIds } = this.getRenderValues();
 
     if (Array.isArray(season)) {
-      season = <IpfsContent hash={getMultihash(season.slice(4))} />
+      season = <IpfsContent hash={getMultihash(season.slice(3))} />
     }
 
     return (
       <div>
         {season}
+        <div>Plots - {Array.isArray(plotIds) ? plotIds.join(',') : plotIds}</div>
       </div>
     )
   }

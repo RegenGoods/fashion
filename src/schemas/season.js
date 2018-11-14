@@ -1,4 +1,13 @@
-const contract = []
+const contract = [
+  {
+    name: 'plots',
+    label: 'Plots',
+    type: 'select',
+    multiple: true,
+    options: [],
+    default: []
+  }
+]
 
 const offChain = [
   {
@@ -31,14 +40,6 @@ const offChain = [
     type: 'date',
     required: false,
     default:''
-  },
-  {
-    name: 'plots',
-    label: 'Plots',
-    type: 'select',
-    multiple: true,
-    options: [],
-    default: []
   }
 ]
 

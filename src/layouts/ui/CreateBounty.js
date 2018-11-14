@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import schema from '../../schemas/farm'
+import schema from '../../schemas/bounty'
 import Create from './Create'
 
 export default () =>

@@ -5,6 +5,8 @@ import { drizzleConnect } from 'drizzle-react'
 import PropTypes from 'prop-types'
 import CreateFarm from './ui/CreateFarm'
 import FarmList from './farms/FarmList'
+import CreateBounty from './ui/CreateBounty'
+import BountyList from './bounties/BountyList'
 
 class User extends Component {
   render () {
@@ -19,9 +21,11 @@ class User extends Component {
           </Grid>
 
           <Grid item xs={4}>
+            <CreateBounty />
+            <BountyList address={this.props.address} />
 
           </Grid>
-          
+
         </Grid>
 
       </div>
