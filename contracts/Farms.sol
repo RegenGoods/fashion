@@ -59,8 +59,9 @@ contract Farms is Plots, Seasons, Measure {
 
   function addMeasurement(uint256 _farmId, uint256 _plotId, bytes32 _hash, uint8 _hashFunction, uint8 _size) public {
     Plot storage plot = plots[_plotId];
+    require (plot.farmId == _farmId, 'Plot does not belong to farm');
     MultiHash memory info = MultiHash(_hash, _hashFunction, _size);
-    Measurement memory measurement = Measurement(measurements.length, msg.sender, info);
+    Measurement memory measurement = Measurement(measurements.length, _plotId, msg.sender, info);
     measurements.push(measurement);
     uint256[] storage measurementIds = plot.measurementIds;
     measurementIds.push(measurement.id);

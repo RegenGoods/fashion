@@ -7,6 +7,7 @@ contract Measure is Multihash {
 
   struct Measurement {
     uint256 id;
+    uint256 plotId;
     address submittedBy;
     MultiHash info;
   }
@@ -17,11 +18,12 @@ contract Measure is Multihash {
 
   event MeasurementAdded(uint256 farmId, uint256 plotId, uint256 measurementId);
 
-  function getMeasurement(uint256 _id) public view returns (address, bytes32, uint8, uint8) {
+  function getMeasurement(uint256 _id) public view returns (address, uint256, bytes32, uint8, uint8) {
     Measurement storage measurement = measurements[_id];
     MultiHash storage info = measurement.info;
     return (
       measurement.submittedBy,
+      measurement.plotId,
       info.hash,
       info.hashFunction,
       info.size
