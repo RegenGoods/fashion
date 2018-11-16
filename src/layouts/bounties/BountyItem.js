@@ -28,8 +28,8 @@ class BountyItem extends Component {
 
     if (Array.isArray(bounty)) {
       created = bounty[2]
-      claimed = bounty[3]
-      bountyContent = <IpfsContent hash={getMultihash(bounty.slice(6))} />
+      claimed = bounty[4]
+      bountyContent = <IpfsContent hash={getMultihash(bounty.slice(7))} />
     }
 
     return (
@@ -39,7 +39,7 @@ class BountyItem extends Component {
           Created By: {bounty[2]}
         </div>
         <div>
-          {bounty[3] ? 'Claimed' : 'Unclaimed'}
+          {claimed ? 'Claimed' : 'Unclaimed'}
         </div>
       </div>
     )

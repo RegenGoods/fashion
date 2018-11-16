@@ -32,11 +32,27 @@ class Create extends Component {
   }
 
   updateShowingForm = open => this.setState({...this.state, open})
+  
   updateShowingInfo = openInfo => this.setState({...this.state, openInfo})
 
-  updateContractField = (field, e, val) => this.setState({...this.state, contractFields: {...this.state.contractFields, [field]: e.target.value}})
+  updateContractField = (field, e, val) =>
+    this.setState({
+      ...this.state,
+      contractFields: {
+        ...this.state.contractFields,
+        [field]: e.target.value
+      }
+    })
 
-  updateOffChainField = (field, e, val) => this.setState({...this.state, offChainFields: {...this.state.offChainFields, [field]: e.target.value}})
+  updateOffChainField = (field, e, val) => {
+    this.setState({
+      ...this.state,
+      offChainFields: {
+        ...this.state.offChainFields,
+        [field]: e.target.value
+      }
+    })
+  }
 
   submit = () => {
     const hashId = Math.ceil(Math.random() * 1000000000000);

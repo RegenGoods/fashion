@@ -6,7 +6,7 @@ import { getMultihash } from '../../util/multihash'
 import {formatGroupInfo, formatGroupData, combineGroupDataAndInfo} from '../../util/formatResponse'
 
 import IpfsContent from '../common/IpfsContent'
-import CreatePlot from '../ui/CreatePlot'
+import CreateMeasurement from '../ui/CreateMeasurement'
 
 class PlotItem extends Component {
   constructor (props, context) {
@@ -25,13 +25,16 @@ class PlotItem extends Component {
   render () {
     const { account, id } = this.props
     let { plot } = this.getRenderValues();
+    let create = null;
 
     if (Array.isArray(plot)) {
+      create = <CreateMeasurement farmId={plot[0]} plotId={id} />
       plot = <IpfsContent hash={getMultihash(plot.slice(1))} />
     }
 
     return (
       <div>
+        {create}
         {plot}
       </div>
     )

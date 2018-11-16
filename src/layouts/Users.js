@@ -7,6 +7,7 @@ import CreateFarm from './ui/CreateFarm'
 import FarmList from './farms/FarmList'
 import CreateBounty from './ui/CreateBounty'
 import BountyList from './bounties/BountyList'
+import MeasurementList from './measurements/MeasurementList'
 
 class User extends Component {
   render () {
@@ -18,6 +19,11 @@ class User extends Component {
           <Grid item xs={4}>
             <CreateFarm />
             <FarmList address={this.props.address}/>
+          </Grid>
+
+          <Grid item xs={4}>
+            <MeasurementList address={this.props.address} />
+
           </Grid>
 
           <Grid item xs={4}>

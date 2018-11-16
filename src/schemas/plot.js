@@ -7,9 +7,9 @@ const plot = [
     default: ''
   },
   {
-    name: 'gps_coords',
+    name: 'bounding_box',
     label: 'GPS Coordinates',
-    type: 'gps',
+    type: 'bbox',
     required: true,
     default: ['','']
   }

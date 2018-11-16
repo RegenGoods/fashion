@@ -18,7 +18,6 @@ export default class FormDialog extends React.Component {
           onClose={this.props.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Create A Group</DialogTitle>
           <DialogContent>
             <DialogContentText>
               {text}

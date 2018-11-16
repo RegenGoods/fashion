@@ -12,7 +12,7 @@ const drizzleOptions = {
     Regen,
   ],
   events: {
-    Regen: ['SeasonStarted', 'SeasonClosed', 'FarmAdded', 'BountyAdded', 'BountyClaimed', 'BountyResolved']
+    Regen: ['SeasonStarted', 'SeasonClosed', 'FarmAdded', 'BountyAdded', 'BountyResolved']
   },
   polls: {
     accounts: 1500
