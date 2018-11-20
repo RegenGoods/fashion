@@ -15,6 +15,7 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
+  logo: {color: 'green'},
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
@@ -28,7 +29,7 @@ function ButtonAppBar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            <Link to="/">
+            <Link to="/" className={classes.logo}>
               RegenCotton
             </Link>
           </Typography>

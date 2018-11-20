@@ -6,7 +6,8 @@ import { DrizzleProvider } from 'drizzle-react'
 // Layouts
 import Home from './layouts/Home'
 import User from './layouts/Users'
-import Farms from './layouts/Farms'
+import Farm from './layouts/Farm'
+import Bounties from './layouts/Bounties'
 import { LoadingContainer } from 'drizzle-react-components'
 
 import { history, store } from './store'
@@ -25,7 +26,8 @@ ReactDOM.render((
           <div>
           <Route exact path="/" component={Home} />
           <Route exact path="/users/:address" component={User} />
-          <Route exact path="/farm" component={Farms} />
+          <Route exact path="/farm/:farmId" component={Farm} />
+          <Route exact path="/bounties" component={Bounties} />
           </div>
         </Router>
       </LoadingContainer>

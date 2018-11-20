@@ -14,25 +14,29 @@ class User extends Component {
     return (
       <div>
         <TopBar address={this.props.address} />
-        <Grid container spaceing={16}>
+        <div>
 
-          <Grid item xs={4}>
-            <CreateFarm />
-            <FarmList address={this.props.address}/>
+          <Grid container spaceing={16}>
+
+
+            <Grid item xs={4}>
+              <CreateFarm />
+              <FarmList address={this.props.address}/>
+            </Grid>
+
+            <Grid item xs={4}>
+              <MeasurementList address={this.props.address} />
+
+            </Grid>
+
+            <Grid item xs={4}>
+              <CreateBounty />
+              <BountyList address={this.props.address} />
+
+            </Grid>
+
           </Grid>
-
-          <Grid item xs={4}>
-            <MeasurementList address={this.props.address} />
-
-          </Grid>
-
-          <Grid item xs={4}>
-            <CreateBounty />
-            <BountyList address={this.props.address} />
-
-          </Grid>
-
-        </Grid>
+        </div>
 
       </div>
     )

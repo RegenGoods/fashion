@@ -7,7 +7,7 @@ const plot = [
     default: ''
   },
   {
-    name: 'bounding_box',
+    name: 'boundingBox',
     label: 'GPS Coordinates',
     type: 'bbox',
     required: true,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { drizzleConnect } from 'drizzle-react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import { getMultihash } from '../../util/multihash'
 import {formatGroupInfo, formatGroupData, combineGroupDataAndInfo} from '../../util/formatResponse'

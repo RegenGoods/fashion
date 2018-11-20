@@ -52,6 +52,10 @@ contract Bounties is Multihash {
     return bountiesForOwner[_owner];
   }
 
+  function getBountyIdsForFarm (uint256 _id) public view returns (uint256[]) {
+    return bountiesClaimedByFarm[_id];
+  }
+
   function getBounty(uint256 _id) public view returns (uint256, uint256, address, uint256[], bool, bool, bool, bytes32, uint8, uint8) {
     Bounty storage bounty = bounties[_id];
     return (
