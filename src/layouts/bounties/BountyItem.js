@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import { getMultihash } from '../../util/multihash'
 import {formatGroupInfo, formatGroupData, combineGroupDataAndInfo} from '../../util/formatResponse'
 
+import BountyBid from '../ui/BountyBid'
+import AssignBounty from '../ui/AssignBounty'
 import IpfsContent from '../common/IpfsContent'
 
 class BountyItem extends Component {
@@ -22,12 +24,14 @@ class BountyItem extends Component {
   }
 
   render () {
-    const { account, id } = this.props
+    const { address, id, farmId } = this.props
     let { bounty } = this.getRenderValues();
     let created, claimed, bountyContent = 'loading';
+    let bidders = [];
 
     if (Array.isArray(bounty)) {
       created = bounty[2]
+      bidders = bounty[3]
       claimed = bounty[4]
       bountyContent = <IpfsContent hash={getMultihash(bounty.slice(7))} />
     }
@@ -36,10 +40,17 @@ class BountyItem extends Component {
       <div>
         {bountyContent}
         <div>
-          Created By: {bounty[2]}
+          Created By: {created}
         </div>
+        { !claimed && created === address ?
+
+          <div>
+            Bidders: {bidders.map((b, i) => <div>{b}<AssignBounty bountyId={id} farmId={b} farmIdx={i} /></div>)}
+          </div>
+          : null
+        }
         <div>
-          {claimed ? 'Claimed' : 'Unclaimed'}
+          {claimed ? 'Claimed' : farmId ? <BountyBid bountyId={id} farmId={farmId} />: 'Unclaimed'}
         </div>
       </div>
     )
@@ -53,6 +64,7 @@ BountyItem.contextTypes = {
 // May still need this even with data function to refresh component on updates for this contract.
 const mapStateToProps = state => {
   return {
+    address: state.accounts[0],
     Regen: state.contracts.Regen
   }
 }

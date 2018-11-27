@@ -1,5 +1,22 @@
 const offChain = [
   {
+    name: 'good',
+    label: 'Good',
+    type: 'select',
+    required: true,
+    default: 'cotton',
+    options: [
+      {
+        value: 'cotton',
+        label: 'Cotton'
+      },
+      {
+        value: 'leather',
+        label: 'Leather'
+      }
+    ]
+  },
+  {
     name: 'payout',
     label: 'Payout',
     type: 'currency',

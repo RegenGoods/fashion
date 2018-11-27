@@ -18,29 +18,32 @@ class BountyCard extends Component {
     super(props)
 
     this.methods = context.drizzle.contracts.Regen.methods
-    this.plotKey = this.methods.getPlot.cacheCall(props.id)
+    this.bountyKey = this.methods.getBounty.cacheCall(props.id)
   }
 
   getRenderValues = () => {
     return {
-      plot: this.props.Regen.getPlot[this.plotKey] ?
-        Object.values(this.props.Regen.getPlot[this.plotKey].value) : 'loading plot',
+      bountyResponse: this.props.Regen.getBounty[this.bountyKey] ?
+        Object.values(this.props.Regen.getBounty[this.bountyKey].value) : 'loading bounty',
     }
   }
 
   render () {
     const { account, id } = this.props
-    let { plot } = this.getRenderValues();
+    let { bountyResponse } = this.getRenderValues();
+    let created, claimed, bounty = 'loading';
 
-    if (Array.isArray(plot)) {
-      plot = <IpfsContent hash={getMultihash(plot.slice(1))} />
+    if (Array.isArray(bountyResponse)) {
+      created = bountyResponse[2]
+      claimed = bountyResponse[4]
+      bounty = <IpfsContent hash={getMultihash(bountyResponse.slice(7))} />
     }
 
 
 
     return (
       <div>
-        {plot}
+        {bounty}
       </div>
     )
   }

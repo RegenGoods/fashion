@@ -33,6 +33,9 @@ function ButtonAppBar(props) {
               RegenCotton
             </Link>
           </Typography>
+          <Link to={`/bounties`}>
+            Bounties
+          </Link>
           <Link to={`/users/${address}`}>
             <Blockie address={address} />
           </Link>

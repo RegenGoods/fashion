@@ -42,7 +42,9 @@ class Item extends Component {
 
     return (
       <div>
-        {farm}
+        <Link to={`/farm/${id}`}>
+          {farm}
+        </Link>
         <div>
           <h4>Seasons</h4>
           {Array.isArray(plotIds) ?  <CreateSeason farmId={id} plotOptions={plotIds.map(id => ({value:id, label:id}))} /> : null}
